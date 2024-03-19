@@ -2,23 +2,39 @@ const db = require('../config/database');
 
 class Client {
     async createNewClient(clientData) {
-        const result = await db.promise().query('INSERT INTO ClientInfo SET ?', clientData);
-        return result;
+        try {
+            const result = await db('ClientInfo').insert(clientData);
+            return result;
+        } catch (error) {
+            throw error;
+        }
     }
     
     async getClientByUsername(username) {
-        const [client] = await db.promise().query('SELECT * FROM ClientInfo WHERE Username = ?', [username]);
-        return client;
+        try {
+            const client = await db('ClientInfo').where('Username', username).first();
+            return client;
+        } catch (error) {
+            throw error;
+        }
     }
 
     async getClientByEmail(email) {
-        const [client] = await db.promise().query('SELECT * FROM ClientInfo WHERE Email = ?', [email]);
-        return client;
+        try {
+            const client = await db('ClientInfo').where('Email', email).first();
+            return client;
+        } catch (error) {
+            throw error;
+        }
     }
 
     async getClientById(clientId) {
-        const [client] = await db.promise().query('SELECT * FROM ClientInfo WHERE ClientId = ?', [clientId]);
-        return client;
+        try {
+            const client = await db('ClientInfo').where('ClientId', clientId).first();
+            return client;
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

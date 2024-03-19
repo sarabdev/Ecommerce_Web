@@ -3,7 +3,7 @@ const db = require('../config/database');
 class ProductItem {
     async createProduct(productData) {
         try {
-            const result = await db.promise().query('INSERT INTO ProductItems SET ?', productData);
+            const result = await db('ProductItems').insert(productData);
             return result;
         } catch (error) {
             throw error;
@@ -12,7 +12,7 @@ class ProductItem {
 
     async getProductById(productId) {
         try {
-            const [product] = await db.promise().query('SELECT * FROM ProductItems WHERE ProductId = ?', [productId]);
+            const product = await db('ProductItems').where('ProductId', productId).first();
             return product;
         } catch (error) {
             throw error;
@@ -21,7 +21,7 @@ class ProductItem {
 
     async updateProduct(productId, productData) {
         try {
-            const result = await db.promise().query('UPDATE ProductItems SET ? WHERE ProductId = ?', [productData, productId]);
+            const result = await db('ProductItems').where('ProductId', productId).update(productData);
             return result;
         } catch (error) {
             throw error;
@@ -30,7 +30,7 @@ class ProductItem {
 
     async deleteProduct(productId) {
         try {
-            const result = await db.promise().query('DELETE FROM ProductItems WHERE ProductId = ?', [productId]);
+            const result = await db('ProductItems').where('ProductId', productId).del();
             return result;
         } catch (error) {
             throw error;
@@ -39,7 +39,7 @@ class ProductItem {
 
     async getAllProducts() {
         try {
-            const [products] = await db.promise().query('SELECT * FROM ProductItems');
+            const products = await db('ProductItems').select('*');
             return products;
         } catch (error) {
             throw error;
@@ -48,7 +48,7 @@ class ProductItem {
 
     async getProductsByCategory(categoryId) {
         try {
-            const [products] = await db.promise().query('SELECT * FROM ProductItems WHERE CategoryId = ?', [categoryId]);
+            const products = await db('ProductItems').where('CategoryId', categoryId);
             return products;
         } catch (error) {
             throw error;

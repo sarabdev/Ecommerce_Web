@@ -11,19 +11,19 @@ exports.signup = async (req, res) => {
         return res.status(400).json({ message: 'First Name, Last Name, Email, Username, and Password are required' });
     }
 
-    // Check if the email or username already exists in the database
-    const clientByEmail = await clientModel.getClientByEmail(email);
-    const clientByUsername = await clientModel.getClientByUsername(username);
-
-    if (clientByEmail.length>0) {
-        return res.status(400).json({ message: 'Email is already registered' });
-    }
-
-    if (clientByUsername.length>0) {
-        return res.status(400).json({ message: 'Username is already taken' });
-    }
-
     try {
+        // Check if the email or username already exists in the database
+        const clientByEmail = await clientModel.getClientByEmail(email);
+        const clientByUsername = await clientModel.getClientByUsername(username);
+
+        if (clientByEmail) {
+            return res.status(400).json({ message: 'Email is already registered' });
+        }
+
+        if (clientByUsername) {
+            return res.status(400).json({ message: 'Username is already taken' });
+        }
+
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const clientData = {
@@ -34,15 +34,13 @@ exports.signup = async (req, res) => {
             PasswordHash: hashedPassword,
         };
 
-        const result = await clientModel.createNewClient(clientData);
+        await clientModel.createNewClient(clientData);
         res.status(201).json({ message: 'Client created successfully' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error creating client' });
     }
-}
-
-
+};
 
 exports.login = async (req, res) => {
     try {
@@ -57,17 +55,19 @@ exports.login = async (req, res) => {
         if (!client) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
-        const passwordMatch = await bcrypt.compare(password, client[0].PasswordHash);
+        
+        const passwordMatch = await bcrypt.compare(password, client.PasswordHash);
 
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
+
         const jwtSecret = process.env.JWT_SECRET;
-        const token = jwt.sign({ clientId: client[0].ClientId }, jwtSecret, { expiresIn: '1h' });
+        const token = jwt.sign({ clientId: client.ClientId }, jwtSecret, { expiresIn: '1h' });
 
         res.status(200).json({ token });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
     }
-}
+};

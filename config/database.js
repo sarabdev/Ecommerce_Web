@@ -1,28 +1,26 @@
-const mysql = require('mysql2');
+const knex = require('knex');
 
-const dbConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-
-  };
+const dbConfig =  {
+    client: 'mysql2',
+    connection: {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+    },
+};
   
-// Create a single connection
-const connection = mysql.createConnection(dbConfig);
+// Create a Knex instance
+const db = knex(dbConfig);
 
-// Connect to the database
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to database:', err.stack);
-    return;
-  }
-  console.log('Connected to database');
-});
+// Test the database connection
+db.raw('SELECT 1+1 as result')
+    .then(() => {
+        console.log('Connected to database');
+    })
+    .catch((err) => {
+        console.error('Error connecting to database:', err);
+    });
 
-// Handle connection errors
-connection.on('error', (err) => {
-  console.error('Database error:', err);
-});
+module.exports = db;
 
-module.exports = connection;
