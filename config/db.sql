@@ -100,3 +100,15 @@ CREATE TABLE ProductsFromVendors (
     FOREIGN KEY (ProductId) REFERENCES ProductItems(ProductId),
     FOREIGN KEY (VendorId) REFERENCES VendorInfo(VendorId)
 );
+
+CREATE TABLE PaymentTransactions (
+    TransactionId BIGINT auto_increment PRIMARY KEY,
+    OrderId BIGINT NOT NULL,
+    TransactionAmount DECIMAL(10,2) NOT NULL,
+    StateTax DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    FederalTax DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    LocalTax DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    TransactionDate DATETIME NOT NULL,
+    PaymentMethod VARCHAR(255) NOT NULL,
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId)
+);
