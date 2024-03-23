@@ -118,3 +118,11 @@ CREATE TABLE UserActivity (
     ActivityDate DATETIME NOT NULL,
     FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
 );
+CREATE TABLE Advertisers (
+    AdvertiserId BIGINT NOT NULL auto_increment PRIMARY KEY,
+    CompanyName VARCHAR(255) NOT NULL,
+    ContactName VARCHAR(255),
+    ContactEmail VARCHAR(255),
+    AccountBalance DECIMAL(10,2) DEFAULT 0.00,
+    JoinDate DATETIME NOT NULL
+);
