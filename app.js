@@ -10,6 +10,7 @@ const reviewRoutes= require("./routes/review")
 const vendorRoutes= require("./routes/vendor")
 const productsFromVendorRoutes= require("./routes/productsFromVendor")
 const paymentTransactionRoutes= require("./routes/paymentTransaction")
+const userActivityRoutes= require("./routes/userActivity")
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/order_detail", orderDetailRoutes)
 app.use("/api/review", reviewRoutes)
 app.use("/api/products_from_vendor", productsFromVendorRoutes)
 app.use("/api/payment_transaction", paymentTransactionRoutes)
+app.use("/api/user_activity", userActivityRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;

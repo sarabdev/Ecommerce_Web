@@ -112,3 +112,9 @@ CREATE TABLE PaymentTransactions (
     PaymentMethod VARCHAR(255) NOT NULL,
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId)
 );
+CREATE TABLE UserActivity (
+    ClientId BIGINT NOT NULL,
+    ActivityType VARCHAR(255) NOT NULL,
+    ActivityDate DATETIME NOT NULL,
+    FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
+);
