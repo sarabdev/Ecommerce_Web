@@ -8,6 +8,7 @@ const orderRoutes= require("./routes/order")
 const orderDetailRoutes= require("./routes/orderDetail")
 const reviewRoutes= require("./routes/review")
 const vendorRoutes= require("./routes/vendor")
+const productsFromVendorRoutes= require("./routes/productsFromVendor")
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use('/api/product_item', productItemRoutes)
 app.use('/api/order', orderRoutes)
 app.use("/api/order_detail", orderDetailRoutes)
 app.use("/api/review", reviewRoutes)
+app.use("/api/products_from_vendor", productsFromVendorRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;

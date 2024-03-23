@@ -90,3 +90,13 @@ CREATE TABLE VendorInfo (
     Country VARCHAR(255),
 	PasswordHash CHAR(60) NOT NULL
 );
+
+CREATE TABLE ProductsFromVendors (
+    ProductId BIGINT NOT NULL,
+    VendorId BIGINT NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    QuantityAvailable INT,
+    PRIMARY KEY (ProductId, VendorId),
+    FOREIGN KEY (ProductId) REFERENCES ProductItems(ProductId),
+    FOREIGN KEY (VendorId) REFERENCES VendorInfo(VendorId)
+);
