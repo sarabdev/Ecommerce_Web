@@ -63,3 +63,15 @@ CREATE TABLE OrderDetails (
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
     FOREIGN KEY (ProductId) REFERENCES ProductItems(ProductId)
 );
+
+
+CREATE TABLE Reviews (
+    ReviewId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ProductId BIGINT NOT NULL,
+    ClientId BIGINT NOT NULL,
+    Rating INT NOT NULL,
+    Comment TEXT,
+    TimeStamp_ DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ProductId) REFERENCES ProductItems(ProductId),
+    FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
+);

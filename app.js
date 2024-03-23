@@ -6,6 +6,7 @@ const categoryRoutes = require('./routes/catgeory')
 const productItemRoutes = require('./routes/productItem')
 const orderRoutes= require("./routes/order")
 const orderDetailRoutes= require("./routes/orderDetail")
+const reviewRoutes= require("./routes/review")
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/api/categories', categoryRoutes)
 app.use('/api/product_item', productItemRoutes)
 app.use('/api/order', orderRoutes)
 app.use("/api/order_detail", orderDetailRoutes)
+app.use("/api/review", reviewRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;
