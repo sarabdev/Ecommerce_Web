@@ -75,3 +75,18 @@ CREATE TABLE Reviews (
     FOREIGN KEY (ProductId) REFERENCES ProductItems(ProductId),
     FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
 );
+
+CREATE TABLE VendorInfo (
+    VendorId BIGINT auto_increment PRIMARY KEY,
+    VendorName VARCHAR(255) NOT NULL,
+    ContactName VARCHAR(255),
+    Phone VARCHAR(255),
+    Email VARCHAR(255),
+    Address1 VARCHAR(255),
+    Address2 VARCHAR(255),
+    City VARCHAR(255),
+    State VARCHAR(255),
+    PostalCode VARCHAR(255),
+    Country VARCHAR(255),
+	PasswordHash CHAR(60) NOT NULL
+);

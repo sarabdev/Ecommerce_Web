@@ -7,6 +7,7 @@ const productItemRoutes = require('./routes/productItem')
 const orderRoutes= require("./routes/order")
 const orderDetailRoutes= require("./routes/orderDetail")
 const reviewRoutes= require("./routes/review")
+const vendorRoutes= require("./routes/vendor")
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/client', clientRoutes);
+app.use('/api/vendor', vendorRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/product_item', productItemRoutes)
 app.use('/api/order', orderRoutes)
