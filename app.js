@@ -12,6 +12,7 @@ const productsFromVendorRoutes= require("./routes/productsFromVendor")
 const paymentTransactionRoutes= require("./routes/paymentTransaction")
 const userActivityRoutes= require("./routes/userActivity")
 const advertiserRoutes= require("./routes/advertiser")
+const advertisementRoutes= require("./routes/advertisement")
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api/products_from_vendor", productsFromVendorRoutes)
 app.use("/api/payment_transaction", paymentTransactionRoutes)
 app.use("/api/user_activity", userActivityRoutes)
 app.use("/api/advertiser", advertiserRoutes)
+app.use("/api/advertisement", advertisementRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;

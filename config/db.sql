@@ -126,3 +126,13 @@ CREATE TABLE Advertisers (
     AccountBalance DECIMAL(10,2) DEFAULT 0.00,
     JoinDate DATETIME NOT NULL
 );
+CREATE TABLE Advertisements (
+    AdId BIGINT NOT NULL auto_increment PRIMARY KEY,
+    AdvertiserId BIGINT NOT NULL,
+    Content TEXT NOT NULL,
+    AdType VARCHAR(50),
+    StartDate DATETIME NOT NULL,
+    EndDate DATETIME NOT NULL,
+    IsActive BIT DEFAULT 1, -- SQL Server uses BIT for BOOLEAN
+    FOREIGN KEY (AdvertiserId) REFERENCES Advertisers(AdvertiserId)
+);
