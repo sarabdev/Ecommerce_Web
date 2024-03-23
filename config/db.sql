@@ -46,3 +46,11 @@ CREATE TABLE ProductItems (
     CategoryId BIGINT NOT NULL,
     FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId)
 );
+
+CREATE TABLE Orders (
+    OrderId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    ClientId BIGINT NOT NULL,
+    OrderDate DATETIME NOT NULL,
+    PaymentMethod VARCHAR(255) NOT NULL,
+    FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
+);
