@@ -56,7 +56,7 @@ CREATE TABLE Orders (
 );
 
 CREATE TABLE OrderDetails (
-    OrderDetailId BIGINT auto_increment PRIMARY KEY,
+    OrderDetailId BIGINT AUTO_INCREMENT PRIMARY KEY,
     OrderId BIGINT NOT NULL,
     ProductId BIGINT NOT NULL,
     Quantity INT NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE Reviews (
 );
 
 CREATE TABLE VendorInfo (
-    VendorId BIGINT auto_increment PRIMARY KEY,
+    VendorId BIGINT AUTO_INCREMENT PRIMARY KEY,
     VendorName VARCHAR(255) NOT NULL,
     ContactName VARCHAR(255),
     Phone VARCHAR(255),
@@ -102,7 +102,7 @@ CREATE TABLE ProductsFromVendors (
 );
 
 CREATE TABLE PaymentTransactions (
-    TransactionId BIGINT auto_increment PRIMARY KEY,
+    TransactionId BIGINT AUTO_INCREMENT PRIMARY KEY,
     OrderId BIGINT NOT NULL,
     TransactionAmount DECIMAL(10,2) NOT NULL,
     StateTax DECIMAL(10,2) NOT NULL DEFAULT 0.00,
@@ -119,7 +119,7 @@ CREATE TABLE UserActivity (
     FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
 );
 CREATE TABLE Advertisers (
-    AdvertiserId BIGINT NOT NULL auto_increment PRIMARY KEY,
+    AdvertiserId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     CompanyName VARCHAR(255) NOT NULL,
     ContactName VARCHAR(255),
     ContactEmail VARCHAR(255),
@@ -127,7 +127,7 @@ CREATE TABLE Advertisers (
     JoinDate DATETIME NOT NULL
 );
 CREATE TABLE Advertisements (
-    AdId BIGINT NOT NULL auto_increment PRIMARY KEY,
+    AdId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     AdvertiserId BIGINT NOT NULL,
     Content TEXT NOT NULL,
     AdType VARCHAR(50),
@@ -138,10 +138,19 @@ CREATE TABLE Advertisements (
 );
 
 CREATE TABLE AdPlacements (
-    PlacementId BIGINT NOT NULL auto_increment PRIMARY KEY,
+    PlacementId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     PageLocation VARCHAR(255) NOT NULL, -- i.e., 'homepage_top', 'sidebar', 'footer'
     AdId BIGINT NOT NULL,
     DisplayStartDate DATETIME NOT NULL,
     DisplayEndDate DATETIME NOT NULL,
+    FOREIGN KEY (AdId) REFERENCES Advertisements(AdId)
+);
+
+CREATE TABLE AdPerformance (
+    PerformanceId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    AdId BIGINT NOT NULL,
+    Clicks INT DEFAULT 0,
+    Impressions INT DEFAULT 0,
+    DateRecorded DATETIME NOT NULL,
     FOREIGN KEY (AdId) REFERENCES Advertisements(AdId)
 );

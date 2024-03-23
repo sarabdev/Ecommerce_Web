@@ -14,6 +14,7 @@ const userActivityRoutes= require("./routes/userActivity")
 const advertiserRoutes= require("./routes/advertiser")
 const advertisementRoutes= require("./routes/advertisement")
 const adPlacementRoutes= require("./routes/adPlacement")
+const adPerformanceRoutes= require("./routes/adPerformance")
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use("/api/user_activity", userActivityRoutes)
 app.use("/api/advertiser", advertiserRoutes)
 app.use("/api/advertisement", advertisementRoutes)
 app.use("/api/ad_placement", adPlacementRoutes)
+app.use("/api/ad_performance", adPerformanceRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;
