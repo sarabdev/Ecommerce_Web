@@ -54,3 +54,12 @@ CREATE TABLE Orders (
     PaymentMethod VARCHAR(255) NOT NULL,
     FOREIGN KEY (ClientId) REFERENCES ClientInfo(ClientId)
 );
+
+CREATE TABLE OrderDetails (
+    OrderDetailId BIGINT auto_increment PRIMARY KEY,
+    OrderId BIGINT NOT NULL,
+    ProductId BIGINT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
+    FOREIGN KEY (ProductId) REFERENCES ProductItems(ProductId)
+);
