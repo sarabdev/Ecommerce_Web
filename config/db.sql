@@ -136,3 +136,12 @@ CREATE TABLE Advertisements (
     IsActive BIT DEFAULT 1, -- SQL Server uses BIT for BOOLEAN
     FOREIGN KEY (AdvertiserId) REFERENCES Advertisers(AdvertiserId)
 );
+
+CREATE TABLE AdPlacements (
+    PlacementId BIGINT NOT NULL auto_increment PRIMARY KEY,
+    PageLocation VARCHAR(255) NOT NULL, -- i.e., 'homepage_top', 'sidebar', 'footer'
+    AdId BIGINT NOT NULL,
+    DisplayStartDate DATETIME NOT NULL,
+    DisplayEndDate DATETIME NOT NULL,
+    FOREIGN KEY (AdId) REFERENCES Advertisements(AdId)
+);
