@@ -28,6 +28,15 @@ class Vendor {
         }
     }
 
+    async changePassword(vendorId, hashedPassword) {
+        try {
+            const result = await db('VendorInfo').where('VendorId', vendorId).update({ PasswordHash: hashedPassword });
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
 
 module.exports = new Vendor();

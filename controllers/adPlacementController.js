@@ -22,8 +22,8 @@ exports.createAdPlacement = async (req, res) => {
 
 exports.getAdPlacementById = async (req, res) => {
     try {
-        const { placementId } = req.params;
-        const placement = await adPlacementModel.getAdPlacementById(placementId);
+        const { PlacementId } = req.params;
+        const placement = await adPlacementModel.getAdPlacementById(PlacementId);
 
         if (!placement) {
             return res.status(404).json({ message: 'Ad placement not found' });
@@ -67,7 +67,7 @@ exports.getAllAdPlacements = async (req, res) => {
 
 exports.updateAdPlacement = async (req, res) => {
     try {
-        const { placementId } = req.params;
+        const { PlacementId } = req.params;
         const placementData = req.body;
 
         // Check if the referenced advertisement exists
@@ -76,7 +76,7 @@ exports.updateAdPlacement = async (req, res) => {
             return res.status(404).json({ message: 'Advertisement not found' });
         }
 
-        const result = await adPlacementModel.updateAdPlacement(placementId, placementData);
+        const result = await adPlacementModel.updateAdPlacement(PlacementId, placementData);
         if (result === 0) {
             return res.status(404).json({ message: 'Ad placement not found' });
         }
@@ -89,8 +89,8 @@ exports.updateAdPlacement = async (req, res) => {
 
 exports.deleteAdPlacement = async (req, res) => {
     try {
-        const { placementId } = req.params;
-        const result = await adPlacementModel.deleteAdPlacement(placementId);
+        const { PlacementId } = req.params;
+        const result = await adPlacementModel.deleteAdPlacement(PlacementId);
         if (result === 0) {
             return res.status(404).json({ message: 'Ad placement not found' });
         }

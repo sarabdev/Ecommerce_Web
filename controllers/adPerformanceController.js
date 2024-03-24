@@ -37,9 +37,9 @@ exports.getPerformanceDataById = async (req, res) => {
 
 exports.updatePerformanceData = async (req, res) => {
     try {
-        const { performanceId } = req.params;
+        const { PerformanceId } = req.params;
         const performanceData = req.body;
-        const result = await adPerformanceModel.updatePerformanceData(performanceId, performanceData);
+        const result = await adPerformanceModel.updatePerformanceData(PerformanceId, performanceData);
         if (result === 0) {
             return res.status(404).json({ message: 'Performance data not found' });
         }
@@ -52,8 +52,8 @@ exports.updatePerformanceData = async (req, res) => {
 
 exports.deletePerformanceData = async (req, res) => {
     try {
-        const { performanceId } = req.params;
-        const result = await adPerformanceModel.deletePerformanceData(performanceId);
+        const { PerformanceId } = req.params;
+        const result = await adPerformanceModel.deletePerformanceData(PerformanceId);
         if (result === 0) {
             return res.status(404).json({ message: 'Performance data not found' });
         }

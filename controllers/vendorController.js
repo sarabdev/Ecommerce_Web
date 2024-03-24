@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
         }
 
         // Create JWT token
-        const token = jwt.sign({ vendorId: vendor.VendorId }, jwtSecret, { expiresIn: '1h' });
+        const token = jwt.sign({ vendorId: vendor.VendorId }, jwtSecret, { expiresIn: '1d' });
 
         res.status(200).json({ token });
     } catch (error) {
@@ -76,3 +76,32 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
     }
 };
+
+exports.changePassword= async (req, res) => {
+    try {
+        const { VendorId, OldPassword, NewPassword } = req.body;
+        // Validate request
+        if (!VendorId || !OldPassword || !NewPassword) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        // Verify old password
+        const vendor = await Vendor.getVendorById(VendorId);
+        if (!vendor) {
+            return res.status(404).json({ message: "Vendor not found" });
+        }
+
+        const match = await bcrypt.compare(OldPassword, vendor.PasswordHash);
+        if (!match) {
+            return res.status(403).json({ message: "Old password is incorrect" });
+        }
+        const hashedPassword = await bcrypt.hash(NewPassword, saltRounds);
+
+        // Update password
+        await Vendor.changePassword(VendorId, hashedPassword);
+        res.status(200).json({ message: "Password changed successfully" });
+    } catch (error) {
+        console.error('Error changing password:', error);
+        res.status(500).json({ message: 'Failed to change password' });
+    }
+}
