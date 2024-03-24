@@ -36,6 +36,15 @@ class Client {
             throw error;
         }
     }
+
+    async changePassword(clientId, hashedPassword) {
+        try {
+            const result = await db('ClientInfo').where('ClientId', clientId).update({ PasswordHash: hashedPassword });
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new Client();
