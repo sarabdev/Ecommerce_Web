@@ -15,6 +15,7 @@ const advertiserRoutes= require("./routes/advertiser")
 const advertisementRoutes= require("./routes/advertisement")
 const adPlacementRoutes= require("./routes/adPlacement")
 const adPerformanceRoutes= require("./routes/adPerformance")
+const shippingInfoRoutes= require("./routes/shippingInfo")
 const verifyAuth= require("./middleware/verifyAuth")
 
 const app = express();
@@ -37,6 +38,7 @@ app.use("/api/advertiser",verifyAuth, advertiserRoutes)
 app.use("/api/advertisement",verifyAuth, advertisementRoutes)
 app.use("/api/ad_placement",verifyAuth, adPlacementRoutes)
 app.use("/api/ad_performance",verifyAuth, adPerformanceRoutes)
+app.use("/api/shipping_info",verifyAuth, shippingInfoRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;

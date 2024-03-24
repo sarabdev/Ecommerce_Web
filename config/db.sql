@@ -154,3 +154,12 @@ CREATE TABLE AdPerformance (
     DateRecorded DATETIME NOT NULL,
     FOREIGN KEY (AdId) REFERENCES Advertisements(AdId)
 );
+
+CREATE TABLE ShippingInfo (
+    ShippingId BIGINT Auto_Increment PRIMARY KEY,
+    OrderId BIGINT NOT NULL,
+    Status VARCHAR(255) NOT NULL,
+    TrackingNumber VARCHAR(255),
+    EstimatedDelivery DATE,
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId)
+);
