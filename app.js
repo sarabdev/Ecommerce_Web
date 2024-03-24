@@ -15,6 +15,7 @@ const advertiserRoutes= require("./routes/advertiser")
 const advertisementRoutes= require("./routes/advertisement")
 const adPlacementRoutes= require("./routes/adPlacement")
 const adPerformanceRoutes= require("./routes/adPerformance")
+const verifyAuth= require("./middleware/verifyAuth")
 
 const app = express();
 
@@ -24,18 +25,18 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/client', clientRoutes);
 app.use('/api/vendor', vendorRoutes)
-app.use('/api/categories', categoryRoutes)
-app.use('/api/product_item', productItemRoutes)
-app.use('/api/order', orderRoutes)
-app.use("/api/order_detail", orderDetailRoutes)
-app.use("/api/review", reviewRoutes)
-app.use("/api/products_from_vendor", productsFromVendorRoutes)
-app.use("/api/payment_transaction", paymentTransactionRoutes)
-app.use("/api/user_activity", userActivityRoutes)
-app.use("/api/advertiser", advertiserRoutes)
-app.use("/api/advertisement", advertisementRoutes)
-app.use("/api/ad_placement", adPlacementRoutes)
-app.use("/api/ad_performance", adPerformanceRoutes)
+app.use('/api/categories',verifyAuth, categoryRoutes)
+app.use('/api/product_item', verifyAuth, productItemRoutes)
+app.use('/api/order', verifyAuth, orderRoutes)
+app.use("/api/order_detail",verifyAuth, orderDetailRoutes)
+app.use("/api/review",verifyAuth, reviewRoutes)
+app.use("/api/products_from_vendor", verifyAuth, productsFromVendorRoutes)
+app.use("/api/payment_transaction",verifyAuth, paymentTransactionRoutes)
+app.use("/api/user_activity",verifyAuth, userActivityRoutes)
+app.use("/api/advertiser",verifyAuth, advertiserRoutes)
+app.use("/api/advertisement",verifyAuth, advertisementRoutes)
+app.use("/api/ad_placement",verifyAuth, adPlacementRoutes)
+app.use("/api/ad_performance",verifyAuth, adPerformanceRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 3000;
