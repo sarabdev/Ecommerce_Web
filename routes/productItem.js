@@ -4,6 +4,8 @@ const productController = require('../controllers/productItemController');
 
 router.post('/', productController.createProduct);
 
+router.post('/bulk', productController.createBulkProducts)
+
 router.get('/:productId', productController.getProductById);
 
 router.put('/:productId', productController.updateProduct);

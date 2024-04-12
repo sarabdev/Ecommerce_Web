@@ -10,6 +10,15 @@ class ProductsFromVendors {
         }
     }
 
+    async addBulkProductsFromVendors(productsData) {
+        try {
+            const result = await db('ProductsFromVendors').insert(productsData);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async getProductFromVendor(productId, vendorId) {
         try {
             const product = await db('ProductsFromVendors')

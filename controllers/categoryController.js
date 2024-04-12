@@ -11,6 +11,17 @@ exports.createCategory = async (req, res) => {
     }
 };
 
+exports.createBulkCategories = async (req, res) => {
+    try {
+        const categoriesData = req.body;
+        const result = await Category.createBulkCategories(categoriesData);
+        res.status(201).json({ message: 'Bulk categories created successfully', categoryIds: result });
+    } catch (error) {
+        console.error('Error creating bulk categories:', error);
+        res.status(500).json({ message: 'Failed to create bulk categories' });
+    }
+};
+
 exports.getCategoryById = async (req, res) => {
     try {
         const { categoryId } = req.params;

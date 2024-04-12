@@ -11,6 +11,17 @@ exports.createProduct = async (req, res) => {
     }
 };
 
+exports.createBulkProducts = async (req, res) => {
+    try {
+        const productsData = req.body;
+        const result = await ProductItem.createBulkProducts(productsData);
+        res.status(201).json({ message: 'Bulk products created successfully', productIds: result });
+    } catch (error) {
+        console.error('Error creating bulk products:', error.message || error);
+        res.status(500).json({ message: 'Failed to create bulk products' });
+    }
+};
+
 exports.getProductById = async (req, res) => {
     try {
         const { productId } = req.params;

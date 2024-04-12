@@ -26,6 +26,17 @@ exports.addProductFromVendor = async (req, res) => {
     }
 };
 
+exports.addBulkProductsFromVendors = async (req, res) => {
+    try {
+        const productsData = req.body;
+        const results = await ProductsFromVendors.addBulkProductsFromVendors(productsData);
+        res.status(201).json({ message: 'Bulk products added from vendors successfully', productIds: results });
+    } catch (error) {
+        console.error('Error adding bulk products from vendors:', error);
+        res.status(500).json({ message: 'Failed to add bulk products from vendors' });
+    }
+};
+
 exports.getProductFromVendor = async (req, res) => {
     try {
         const { productId, vendorId } = req.params;

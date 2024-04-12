@@ -4,6 +4,8 @@ const categoryController = require('../controllers/categoryController');
 
 router.post('/', categoryController.createCategory);
 
+router.post('/bulk', categoryController.createBulkCategories)
+
 router.get('/:categoryId', categoryController.getCategoryById);
 
 router.put('/:categoryId', categoryController.updateCategory);

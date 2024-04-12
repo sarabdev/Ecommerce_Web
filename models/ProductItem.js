@@ -10,6 +10,15 @@ class ProductItem {
         }
     }
 
+    async createBulkProducts(productsData) {
+        try {
+            const result = await db('ProductItems').insert(productsData);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async getProductById(productId) {
         try {
             const product = await db('ProductItems').where('ProductId', productId).first();

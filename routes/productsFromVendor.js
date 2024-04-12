@@ -5,6 +5,10 @@ const productFromVendorController = require('../controllers/productsFromVendorCo
 // Add a product from a vendor
 router.post('/', productFromVendorController.addProductFromVendor);
 
+// Add bulk products from vendor
+router.post('/bulk', productFromVendorController.addProductFromVendor);
+
+
 // Get a product from a vendor by product ID and vendor ID
 router.get('/:productId/:vendorId', productFromVendorController.getProductFromVendor);
 

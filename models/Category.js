@@ -9,6 +9,15 @@ class Category {
             throw error;
         }
     }
+
+    async createBulkCategories(categoriesData) {
+        try {
+            const result = await db('Categories').insert(categoriesData);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
     
     async getCategoryById(categoryId) {
         try {
